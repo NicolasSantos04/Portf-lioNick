@@ -32,7 +32,10 @@ assets/videos/
 ## Common edits
 - **Titles / categories:** edit the text inside each `<article class="card">` in `index.html`.
 - **Add a video card:** copy a `<article class="card" …>` in the `.vd` section, change `data-full`, the preview `<video src>`, title and category. Set `--dy` (`0px` odd / `56px` even) and `--d0` / `--d` (animation delays) to follow the pattern.
-- **YouTube video card:** instead of `data-full`, use `data-youtube="<video id>"` (add `data-vertical` for Shorts) and put the thumbnail as an `<img>` inside `.shot` (thumbnails live in `assets/images/videos/`, from `https://i.ytimg.com/vi/<id>/maxresdefault.jpg`, or `oardefault.jpg` for Shorts). Unlisted videos work.
+- **YouTube video card:** instead of `data-full`, use `data-youtube="<video id>"` (add `data-vertical` for Shorts); the click opens the YouTube player (unlisted videos work). The card preview is still a local loop in `assets/videos/previews/`.
+- **Preview format:** 540×720, 24 fps, 6 s, no audio, H.264 (~300–600 kbps), e.g.
+  `ffmpeg -ss <start> -i in.mp4 -t 6 -an -vf "crop=ih*3/4:ih,scale=540:720,fps=24,format=yuv420p" -c:v libx264 -crf 26 -movflags +faststart out.mp4`
+  (use `crop=iw:iw*4/3` for vertical sources).
 - **Colors:** the palette is repeated in `css/style.css` (violet `#5b1a7a`, `#b026c9`, `#7c3aed`; lilac text `#c4b5fd`; dark `#06030d`). Search and replace.
 - **Font:** Inter, `letter-spacing: -0.05em` on every section.
 

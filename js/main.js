@@ -91,34 +91,8 @@
     var embed = document.getElementById('video-embed');
     var lastFocus = null;
 
-    // YouTube cards: muted, looping, control-less embed as the preview (thumbnail stays underneath until it plays)
-    function startPreviews() {
-      root.querySelectorAll('.card[data-youtube]').forEach(function (card) {
-        var yt = card.getAttribute('data-youtube');
-        var frame = document.createElement('iframe');
-        frame.className = 'yt-prev' + (card.hasAttribute('data-vertical') ? ' vertical' : '');
-        frame.src = 'https://www.youtube-nocookie.com/embed/' + yt +
-          '?autoplay=1&mute=1&loop=1&playlist=' + yt + '&controls=0&disablekb=1&fs=0&rel=0&iv_load_policy=3&cc_load_policy=0&playsinline=1&enablejsapi=1';
-        frame.title = '';
-        frame.tabIndex = -1;
-        frame.setAttribute('aria-hidden', 'true');
-        frame.allow = 'autoplay; encrypted-media';
-        // fade in after YouTube's title overlay has gone
-        frame.addEventListener('load', function () {
-          // hide captions that the video turns on by default
-          [1000, 2500].forEach(function (t) {
-            setTimeout(function () {
-              frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unloadModule', args: ['captions'] }), '*');
-            }, t);
-          });
-          setTimeout(function () { frame.classList.add('on'); }, 3000);
-        });
-        card.querySelector('.shot').appendChild(frame);
-      });
-    }
-
     // reveal when the section enters the viewport
-    function show() { root.classList.add('in'); startPreviews(); }
+    function show() { root.classList.add('in'); }
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (es) {
         if (es.some(function (x) { return x.isIntersecting; })) { show(); io.disconnect(); }
