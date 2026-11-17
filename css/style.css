@@ -83,12 +83,18 @@ body{margin:0;background:#06030d}
 .vd .shot{height:400px;overflow:hidden;background:#12081f}
 .vd .shot video{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .vd .card:hover .shot video{transform:scale(1.05)}
+.vd .shot img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.vd .card:hover .shot img{transform:scale(1.05)}
 .vd .cap{flex:1;padding:14px 18px 16px;display:flex;flex-direction:column;justify-content:center;gap:4px}
 .vd .rv{transition:opacity .6s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 .vd .rule{flex:1;height:1px;background:rgba(255,255,255,.3);transform-origin:left;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .vd .card{cursor:pointer}
 .vd .ov{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:32px;background:rgba(6,3,13,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);animation:ovIn .3s ease}
 .vd .ov video{display:block;max-width:90vw;max-height:86vh;border-radius:16px;background:#000;box-shadow:0 30px 90px rgba(90,30,160,.5);animation:vIn .4s cubic-bezier(.2,.7,.2,1)}
+.vd .ov video[hidden],.vd .yt[hidden]{display:none}
+.vd .yt{width:min(90vw,calc(86vh * 16 / 9));aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 30px 90px rgba(90,30,160,.5);animation:vIn .4s cubic-bezier(.2,.7,.2,1)}
+.vd .yt.vertical{width:min(90vw,calc(86vh * 9 / 16));aspect-ratio:9/16}
+.vd .yt iframe{display:block;width:100%;height:100%;border:0}
 .vd .x{position:absolute;top:24px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(20,14,40,.6);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .vd .x:hover{background:rgba(60,30,110,.85)}
 @keyframes ovIn{from{opacity:0}to{opacity:1}}

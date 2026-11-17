@@ -26,17 +26,18 @@ assets/videos/
 | Hero | `.hero` | "Drag me" button is visual only (no drag behavior yet) |
 | Turning Ideas Into Reality | `.works` | image trail; edit the `imgs` list in `js/main.js` |
 | Let's See My Work | `.pf` | 5 cards, zigzag layout |
-| And some videos… | `.vd` | 7 cards, click opens the full video |
+| And some videos… | `.vd` | 8 cards, click opens the full video (local mp4 or YouTube embed) |
 | Let's Build Something Great | `.ct` | email, phone, Instagram + social icons |
 
 ## Common edits
 - **Titles / categories:** edit the text inside each `<article class="card">` in `index.html`.
 - **Add a video card:** copy a `<article class="card" …>` in the `.vd` section, change `data-full`, the preview `<video src>`, title and category. Set `--dy` (`0px` odd / `56px` even) and `--d0` / `--d` (animation delays) to follow the pattern.
+- **YouTube video card:** instead of `data-full`, use `data-youtube="<video id>"` (add `data-vertical` for Shorts) and put the thumbnail as an `<img>` inside `.shot` (thumbnails live in `assets/images/videos/`, from `https://i.ytimg.com/vi/<id>/maxresdefault.jpg`, or `oardefault.jpg` for Shorts). Unlisted videos work.
 - **Colors:** the palette is repeated in `css/style.css` (violet `#5b1a7a`, `#b026c9`, `#7c3aed`; lilac text `#c4b5fd`; dark `#06030d`). Search and replace.
 - **Font:** Inter, `letter-spacing: -0.05em` on every section.
 
 ## Video files
 The original videos were too large for the preview tool, so the files in `assets/videos/full/` are compressed
-(≈ 9–17 MB each; the "Segredo do Sayajin" and "Henry Cavill" cards use only the first 1:40 at 1080p).
+(≈ 9–17 MB each). Cards 01, 06 and 08 play from YouTube and have no local video file.
 To use your originals, drop them into `assets/videos/full/` and update each card's `data-full` path.
 For hosting, consider YouTube/Vimeo or a CDN for the big files.

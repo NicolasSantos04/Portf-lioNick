@@ -88,6 +88,7 @@
     if (!root) return;
     var modal = document.getElementById('video-modal');
     var player = document.getElementById('video-player');
+    var embed = document.getElementById('video-embed');
     var lastFocus = null;
 
     // reveal when the section enters the viewport
@@ -100,9 +101,26 @@
     } else { show(); }
 
     function open(card) {
+      var yt = card.getAttribute('data-youtube');
+      var title = card.getAttribute('data-title') || '';
       lastFocus = card;
+      if (yt) {
+        // YouTube cards (works with unlisted videos) play in an embedded player
+        var frame = document.createElement('iframe');
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + yt + '?autoplay=1&rel=0&playsinline=1';
+        frame.title = title;
+        frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        frame.allowFullscreen = true;
+        embed.classList.toggle('vertical', card.hasAttribute('data-vertical'));
+        embed.appendChild(frame);
+        embed.hidden = false;
+        player.hidden = true;
+        modal.hidden = false;
+        return;
+      }
       player.src = card.getAttribute('data-full');
-      player.setAttribute('aria-label', card.getAttribute('data-title') || '');
+      player.setAttribute('aria-label', title);
+      player.hidden = false;
       modal.hidden = false;
       player.play().catch(function () {});
     }
@@ -111,6 +129,8 @@
       player.pause();
       player.removeAttribute('src');
       player.load();
+      embed.innerHTML = '';
+      embed.hidden = true;
       modal.hidden = true;
       if (lastFocus) lastFocus.focus();
     }
