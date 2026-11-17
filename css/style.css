@@ -54,6 +54,13 @@ body{margin:0;background:#06030d}
 .pf .card:hover img{transform:scale(1.05)}
 .pf .shot{height:340px;overflow:hidden}
 .pf .cap{flex:1;padding:14px 18px 16px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.pf .card{cursor:zoom-in}
+.pf .card:focus-visible{outline:2px solid #c4b5fd;outline-offset:3px}
+.pf .ov{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:32px;background:rgba(6,3,13,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);animation:ovIn .3s ease}
+.pf .ov[hidden]{display:none}
+.pf .ov img{display:block;width:auto;height:auto;max-width:90vw;max-height:86vh;object-fit:contain;border-radius:16px;box-shadow:0 30px 90px rgba(90,30,160,.5);animation:vIn .4s cubic-bezier(.2,.7,.2,1);cursor:default}
+.pf .x{position:absolute;top:24px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(20,14,40,.6);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pf .x:hover{background:rgba(60,30,110,.85)}
 @media (max-width:700px){.pf{padding:72px 0 72px 24px;min-height:0;gap:36px}
 .pf .head{padding-right:24px;flex-wrap:wrap;align-items:center}
 .pf .row{padding:36px 24px 48px 0;gap:20px}

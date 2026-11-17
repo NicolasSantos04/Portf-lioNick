@@ -128,9 +128,46 @@
     mouseScroll('.vd', function () { return !modal.hidden; });
   })();
 
-  mouseScroll('.pf');
+  /* ---------- 4. Portfolio: expanded image viewer ---------- */
+  (function portfolio() {
+    var root = document.querySelector('.pf');
+    if (!root) return;
+    var modal = document.getElementById('image-modal');
+    var viewer = document.getElementById('image-viewer');
+    var lastFocus = null;
 
-  /* ---------- 4. Buttons that scroll to a section ---------- */
+    function open(card) {
+      var img = card.querySelector('img');
+      lastFocus = card;
+      viewer.src = img.getAttribute('src');
+      viewer.alt = img.alt;
+      modal.hidden = false;
+      modal.querySelector('.x').focus();
+    }
+    function close() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      viewer.removeAttribute('src');
+      if (lastFocus) lastFocus.focus();
+    }
+    root.querySelectorAll('.card').forEach(function (card) {
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'Expand ' + card.querySelector('img').alt);
+      card.addEventListener('click', function () { open(card); });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card); }
+      });
+    });
+    modal.addEventListener('click', close);                       // click outside the image
+    viewer.addEventListener('click', function (e) { e.stopPropagation(); });
+    modal.querySelector('.x').addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+    mouseScroll('.pf', function () { return !modal.hidden; });
+  })();
+
+  /* ---------- 5. Buttons that scroll to a section ---------- */
   document.querySelectorAll('[data-scroll-to]').forEach(function (b) {
     b.addEventListener('click', function () {
       var t = document.querySelector(b.getAttribute('data-scroll-to'));
